@@ -26,7 +26,7 @@ class QueryParamAuth extends AuthMethod
     /**
      * @var string the parameter name for passing the access token
      */
-    public $tokenParam = 'access-token';
+    public $tokenParam = 'accessToken';
 
     /**
      * @inheritdoc
@@ -39,6 +39,7 @@ class QueryParamAuth extends AuthMethod
         if(empty($accessToken)){
             $accessToken = $request->get($this->tokenParam);
         }
+
 
         if (is_string($accessToken) && !empty($accessToken)) {
 

@@ -66,14 +66,13 @@ class UserController extends BaseController
     //登录
     public function actionLogin()
     {
-
         $form = new LoginForm();
         if($form->load(\Yii::$app->getRequest()->post(),'') && !$form->validate())
         {
             ApiException($form->getError(),'900000');
         }
         $auth_key=$form->login();
-        return ['access-token'=>$auth_key];
+        return ['accessToken'=>$auth_key];
     }
 
     //修改密码
@@ -102,5 +101,11 @@ class UserController extends BaseController
         return "";
     }
 
+    //获得用户信息
+    public function actionGetUserinfo(){
+        $uid=\Yii::$app->getUser()->getId();
 
+        $user=User::findOne($uid);
+        return $user;
+    }
 }

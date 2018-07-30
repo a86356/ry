@@ -23,7 +23,7 @@ export  function getMenu(url,type,data) {
 //获得用户信息
 export  function getUserInfo() {
     return fetch({
-        url: '',
+        url: 'v1/user/get-userinfo',
         method: "get",
     })
 }

@@ -10,7 +10,7 @@ import noMatch from './404';
 import UserIndex from '../../pages/system/user/User'
 
 import {getUserInfo} from "../../api/User";
-
+import { message } from 'antd';
 const {Content, Footer} = Layout;
 
 export default class App extends Component {
@@ -21,10 +21,18 @@ export default class App extends Component {
     componentDidMount(){
 
 
+        //用户信息
         getUserInfo().then(res=>{
-
+            let code =res.code;
+            if(code=='000000'){
+                this.setState({
+                    username: res.data.username,
+                });
+            }else{
+                message.error(res.msg);
+            }
         },err=>{
-
+            message.error(err);
         });
 
 
@@ -32,21 +40,18 @@ export default class App extends Component {
 
 
     render() {
-        const {collapsed} = this.state;
+        const {username} = this.state;
         const {location} = this.props;
-        let name;
-        if (localStorage.getItem("token") === null) {
+
+        if (localStorage.getItem("accessToken") === null) {
             return <Redirect to="/login"/>
-        } else {
-         //   name = location.state === undefined ? JSON.parse(localStorage.getItem("mspa_user")).username : location.state.username;
-            name = 'admin';
         }
 
         return (
             <Layout className="ant-layout-has-sider" style={{height: '100%'}}>
-                <SiderCustom collapsed={collapsed} path={location.pathname}/>
+                <SiderCustom  path={location.pathname}/>
                 <Layout>
-                    <HeaderCustom collapsed={collapsed} toggle={this.toggle} username={name}/>
+                    <HeaderCustom   username={username}/>
                     <Content style={{margin: '0 16px'}}>
                         <Switch>
                             <Route exact path={'/app'} component={UForm} />

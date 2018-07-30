@@ -62,11 +62,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        echo 'Now memory_get_usage: ' . memory_get_usage() . '<br />';
         return 'sitecontoller';
-       // $r=Article::find()->where(['article_id'=>1])->one();
-      //  var_dump($r);
-     //   return $this->render('index');
+
     }
 
     /**

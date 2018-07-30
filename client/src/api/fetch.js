@@ -1,6 +1,9 @@
 import axios from 'axios'
 //定义fetch函数，config为配置
 export function fetch(config){
+
+    let accessToken=localStorage.getItem("accessToken");
+
     //返回promise对象
     return new Promise((resolve,reject) =>{
         //创建axios实例，把基本的配置放进去
@@ -8,12 +11,10 @@ export function fetch(config){
             //定义请求文件类型
 
             timeout: 3000,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-            },
+
             withCredentials:"include",
             params:{
-                'access-token':1223,
+                accessToken:accessToken
             },
             //定义请求根目录
             baseURL: 'http://localhost/yiicms/server/web/index.php/'
