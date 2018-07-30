@@ -5,7 +5,7 @@ import { fetch } from './fetch'
 //登陆
 export  function login(data) {
     return fetch({
-        url: '',
+        url: 'v1/user/login',
         method: 'post',
         data: data,
     })

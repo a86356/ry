@@ -16,7 +16,7 @@ export function fetch(config){
                 'access-token':1223,
             },
             //定义请求根目录
-            baseURL: 'http://localhost/yiicms/web/'
+            baseURL: 'http://localhost/yiicms/server/web/index.php/'
         });
         //请求成功后执行的函数
         instance(config).then(res =>{

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../../style/login.less';
-import { Form, Icon, Input, Button, Checkbox, message, Spin } from 'antd';
+import { Form, Icon, Input, Button, message, Spin } from 'antd';
 
-import {success} from "../../api/User";
+import {login} from "../../api/User";
 const FormItem = Form.Item;
 
 
@@ -17,7 +17,7 @@ class NormalLoginForm extends Component {
 
             if (!err) {
 
-                success(values).then(res=>{
+                login(values).then(res=>{
                     let code =res.code;
                     if(code=='0'){
                         this.setState({
