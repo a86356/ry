@@ -28,15 +28,7 @@ class GroupController extends BaseController
         ];
     }
 
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator']=[
-            'class'=>QueryParamAuth::className(),
 
-        ];
-        return $behaviors;
-    }
 
     //添加管理组
     public function actionAdd()

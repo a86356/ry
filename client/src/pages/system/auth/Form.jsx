@@ -67,18 +67,18 @@ export default class UForm extends Component{
     //getData
     getData = () => {
         axios.get('/data')
-            .then(function (response) {
-                // console.log(response.data);
-                this.setState({
-                    dataSource: response.data,
-                    loading:false
-                })
-            }.bind(this))
-            .catch(function (error) {
-                console.log(error);
+        .then(function (response) {
+            // console.log(response.data);
+            this.setState({
+                dataSource: response.data,
+                loading:false
             })
+        }.bind(this))
+        .catch(function (error) {
+            console.log(error);
+        })
 
-
+        
     };
     //用户名输入
     onChangeUserName = (e) => {
@@ -203,20 +203,11 @@ export default class UForm extends Component{
             if (err) {
                 return;
             }
-            console.log(values);
             this.setState({
                 visible: false,
             });
 
-            /*values.key = tableRowKey;
-            values.address = values.address.join(" / ");
-            values.createtime = moment().format("YYYY-MM-DD hh:mm:ss");
 
-            form.resetFields();
-            this.setState({
-                visible: false,
-                dataSource: replace(dataSource, tableRowKey, values)
-            });*/
         });
     };
     //单选框改变选择
@@ -233,7 +224,7 @@ export default class UForm extends Component{
 
         return(
             <div>
-                <BreadcrumbCustom paths={['首页','表格']}/>
+                <BreadcrumbCustom paths={['系统管理','权限管理']}/>
                 <div className='formBody'>
                     <Row gutter={16}>
                         <Col className="gutter-row" sm={8}>

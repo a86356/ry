@@ -4,6 +4,8 @@ return [
         //oss:hypay/test-dir/*
     //oss-cn-hangzhou.aliyuncs.com
     'params'=>[
+
+        'pagesize'=>50,
         //APP直传阿里云OSS
         'oss'=>[
             "AccessKeyID"=> "",

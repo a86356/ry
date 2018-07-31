@@ -6,8 +6,8 @@ import '../../style/index.less';
 import SiderCustom from './SiderCustom';
 import HeaderCustom from './HeaderCustom';
 import noMatch from './404';
-import UForm from '../../pages/system/auth/Form'
-import Welcome from '../../pages/system/welcome/Welcome'
+import UForm from 'pages/system/auth/Form'
+import Welcome from 'pages/system/welcome/Welcome'
 
 import {getUserInfo} from "../../api/User";
 import { message } from 'antd';
@@ -55,8 +55,8 @@ export default class App extends Component {
                     <Content style={{margin: '0 16px'}}>
                         <Switch>
 
-                            <Route exact path={'/'} component={Welcome} />
-                            <Route exact path={'/system/auth'} component={Welcome} />
+                            <Route exact path={'/app'} component={Welcome} />
+                            <Route exact path={'/app/system/auth'} component={UForm} />
                             <Route exact path={'/form'} component={UForm} />
                             <Route component={noMatch} />
                         </Switch>

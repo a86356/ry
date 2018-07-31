@@ -46,7 +46,7 @@ class NormalLoginForm extends Component {
                         message.success('login successed!'); //成功信息
                         let that = this;
                         setTimeout(function() { //延迟进入
-                            that.props.history.push({pathname:'/',state:values});
+                            that.props.history.push({pathname:'/app',state:values});
                         }, 1000);
                     }else{
                         message.error(res.msg);

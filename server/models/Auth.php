@@ -67,4 +67,18 @@ class Auth extends \yii\db\ActiveRecord
     {
         return $this->hasMany(GroupAuth::className(), ['auth_id' => 'auth_id']);
     }
+
+    //获得权限列表
+    public static function getAuthList($page=1){
+        $group_id=Group::getGroupId();
+
+        $pagesize=\Yii::$app->params['pagesize'];
+
+        $sql='select * FROM tk_group  inner join tk_group_auth on  tk_group.group_id=tk_group_auth.group_id inner join tk_auth on tk_group_auth.auth_id=tk_auth.auth_id where tk_group.group_id= '.$group_id.' limit '.($page-1)*$pagesize.','.$pagesize;
+
+        $data = \Yii::$app->db->createCommand($sql)->queryAll();
+        $total_count=count($data);
+        return ['list'=>$data,'total_count'=>$total_count,'page'=>$page,'pagesize'=>$pagesize];
+
+    }
 }

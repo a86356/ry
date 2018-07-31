@@ -77,4 +77,10 @@ class Group extends \yii\db\ActiveRecord
         $group_id=$user->userGroups->group_id;
         return $group_id;
     }
+
+    public static function getGroupId(){
+        $id=\Yii::$app->getUser()->getId();
+        return self::getGroupIdByUid($id);
+    }
+
 }

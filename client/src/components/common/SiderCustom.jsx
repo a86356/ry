@@ -54,7 +54,7 @@ export default class SiderCustom extends Component{
                 <SubMenu key={item.key} title={item.name}>
                     {item.child.map((v2) => {
                         return (
-                            <Menu.Item key={v2.key}><Link to={v2.router}><span>{v2.name}</span></Link></Menu.Item>
+                            <Menu.Item key={v2.key}><Link to={"/app"+v2.router}><span>{v2.name}</span></Link></Menu.Item>
                         )
                     })}
                 </SubMenu>
