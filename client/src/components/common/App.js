@@ -5,9 +5,9 @@ import '../../style/index.less';
 
 import SiderCustom from './SiderCustom';
 import HeaderCustom from './HeaderCustom';
-import UForm from '../form/Form';
 import noMatch from './404';
-import UserIndex from '../../pages/system/user/User'
+import UForm from '../../pages/system/auth/Form'
+import Welcome from '../../pages/system/welcome/Welcome'
 
 import {getUserInfo} from "../../api/User";
 import { message } from 'antd';
@@ -36,12 +36,12 @@ export default class App extends Component {
         });
 
 
+
     }
 
 
     render() {
         const {username} = this.state;
-        const {location} = this.props;
 
         if (localStorage.getItem("accessToken") === null) {
             return <Redirect to="/login"/>
@@ -49,14 +49,15 @@ export default class App extends Component {
 
         return (
             <Layout className="ant-layout-has-sider" style={{height: '100%'}}>
-                <SiderCustom  path={location.pathname}/>
+                <SiderCustom />
                 <Layout>
                     <HeaderCustom   username={username}/>
                     <Content style={{margin: '0 16px'}}>
                         <Switch>
-                            <Route exact path={'/app'} component={UForm} />
-                            <Route exact path={'/app/form'} component={UForm} />
-                            <Route exact path={'/app/system/user/index'} component={UserIndex} />
+
+                            <Route exact path={'/'} component={Welcome} />
+                            <Route exact path={'/system/auth'} component={Welcome} />
+                            <Route exact path={'/form'} component={UForm} />
                             <Route component={noMatch} />
                         </Switch>
                     </Content>

@@ -70,7 +70,7 @@ class Menu extends \yii\db\ActiveRecord
 
         $sql='select * FROM tk_menu order by sort desc';
         if(!empty($menu_ids)){
-            $sql=   'select * FROM tk_menu where menu_id in ('.$menu_ids.') order by sort desc';
+            $sql=   'select * FROM tk_menu where menu_id in ('.$menu_ids.') order by sort asc';
         }
         $data = \Yii::$app->db->createCommand($sql)->queryAll();
 

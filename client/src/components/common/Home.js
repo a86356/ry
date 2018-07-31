@@ -9,9 +9,7 @@ export default class Home extends Component{
     // }
     render(){
         return(
-            localStorage.getItem("mspa_user")===null?
-            <Redirect to="/login"/>:
-            <Redirect to="/app"/>
+            localStorage.getItem("accessToken")===null? <Redirect to="/login"/>: <Redirect to="/"/>
         )
     }
 }

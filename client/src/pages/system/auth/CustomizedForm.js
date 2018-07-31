@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+    import React, { Component } from 'react';
 import { Modal, Form, Input, Radio, InputNumber, Cascader, Select, AutoComplete } from 'antd';
 
 const FormItem = Form.Item;

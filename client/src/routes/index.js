@@ -4,10 +4,9 @@ import history from '../components/common/history';
 
 import App from '../components/common/App';
 import Login from '../components/common/Login';
-import Home from '../components/common/Home';
+import Test1 from '../components/common/Test1';
 import NoMatch from '../components/common/404';
 
-import UserIndex from '../pages/system/user/User'
 
 
 class MRoute extends Component {
@@ -15,10 +14,9 @@ class MRoute extends Component {
     return (
       <Router history={history}>
         <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/app" component={App}/>
+          <Route exact path="/" component={App}/>
           <Route path="/login" component={Login}/>
-          <Route path="/app/system/user/index" component={UserIndex}/>
+          <Route path="/system/auth" component={Test1}/>
           <Route component={NoMatch}/>
         </Switch>
       </Router>

@@ -12,11 +12,10 @@ export  function login(data) {
 }
 
 //获得用户菜单
-export  function getMenu(url,type,data) {
+export  function getMenu() {
     return fetch({
-        url: url,
-        method: type,
-        data: data,
+        url: 'v1/group/get-menu',
+        method: 'get',
     })
 }
 
