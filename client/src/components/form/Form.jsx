@@ -11,6 +11,7 @@ import address from './request/address.json';
 import data from './request/data.json';
 import CollectionCreateForm from './CustomizedForm';
 import FormTable from './FormTable';
+import {getAuthList} from "api/system";
 
 const Search = Input.Search;
 const InputGroup = Input.Group;
@@ -77,6 +78,8 @@ export default class UForm extends Component{
             .catch(function (error) {
                 console.log(error);
             })
+
+
 
 
     };

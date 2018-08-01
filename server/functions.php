@@ -39,3 +39,7 @@ function p($data)
     echo "</pre>";
     die;
 }
+
+function table_prefix(){
+    return "tk_";
+}

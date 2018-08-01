@@ -4,13 +4,17 @@ import './form.less';
 import axios from 'axios';
 import Mock from 'mockjs';
 import moment from 'moment';
-import { Row, Col, Input, Icon, DatePicker, Button, Popconfirm } from 'antd';
+import { Row, Col, Input, Icon, DatePicker, Button, Popconfirm,message } from 'antd';
 
-import BreadcrumbCustom from '../../../components/common/BreadcrumbCustom';
+import BreadcrumbCustom from 'components/common/BreadcrumbCustom';
 import address from './request/address.json';
 import data from './request/data.json';
 import CollectionCreateForm from './CustomizedForm';
 import FormTable from './FormTable';
+
+import {getAuthList,updateAddAuth} from "api/system";
+import {getAuthList} from "../../../api/system";
+import {getMenu} from "../../../api/User";
 
 const Search = Input.Search;
 const InputGroup = Input.Group;
@@ -30,12 +34,13 @@ function isContains(arr, item){
 }
 //找到对应元素的索引
 function catchIndex(arr, key){ //获取INDEX
+    var i=0;
     arr.map(function (ar, index) {
-        if(ar.key === key){
-            return index;
+        if(ar.auth_id==key){
+            i=index;
         }
     });
-    return 0;
+    return i;
 }
 //替换数组的对应项
 function replace(arr, item, place){ //arr 数组,item 数组其中一项, place 替换项
@@ -62,24 +67,34 @@ export default class UForm extends Component{
             tableRowKey: 0,
             isUpdate: false,
             loading: true,
+            page:1,
         };
     }
     //getData
     getData = () => {
-        axios.get('/data')
-        .then(function (response) {
-            // console.log(response.data);
-            this.setState({
-                dataSource: response.data,
-                loading:false
-            })
-        }.bind(this))
-        .catch(function (error) {
-            console.log(error);
-        })
+        getAuthList({page:this.state.page,name:this.state.userName}).then(res=>{
+            let code =res.code;
+            if(code=='000000'){
 
-        
+                var list=res.data.list;
+
+                for(let i=0;i<list.length;i++){
+                    list[i]['key']=list[i]['auth_id']
+                }
+                this.setState({
+                    dataSource: list,
+                    loading:false
+                })
+            }else{
+                message.error(res.msg);
+            }
+        },err=>{
+            message.error(err);
+        });
+
     };
+
+
     //用户名输入
     onChangeUserName = (e) => {
         const value = e.target.value;
@@ -91,35 +106,11 @@ export default class UForm extends Component{
 
     //渲染
     componentDidMount(){
-        axios.get('/address')
-            .then(function (response) {
-                response.data.map(function(province){
-                    options.push({
-                        value: province.name,
-                        label: province.name,
-                        children: province.city.map(function(city){
-                            return {
-                                value: city.name,
-                                label: city.name,
-                                children: city.area.map(function(area){
-                                    return {
-                                        value: area,
-                                        label: area,
-                                    }
-                                })
-                            }
-                        }),
-                    })
-                });
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
         this.getData();
     }
     //搜索按钮
     btnSearch_Click = () => {
-
+        this.getData();
     };
 
     //新建信息弹窗
@@ -141,7 +132,6 @@ export default class UForm extends Component{
         const form = this.form;
         form.validateFields((err, values) => {
 
-            console.log(values);
             if (err) {
                 return;
             }
@@ -175,19 +165,18 @@ export default class UForm extends Component{
     //点击修改
     editClick = (key) => {
 
-
         const form = this.form;
         const { dataSource } = this.state;
+
         const index = catchIndex(dataSource, key);
+
         form.setFieldsValue({
-            key: key,
-            name: dataSource[index].name,
-            sex: dataSource[index].sex,
-            age: dataSource[index].age,
-            address: dataSource[index].address.split(' / '),
-            phone: dataSource[index].phone,
-            email: dataSource[index].email,
-            website: dataSource[index].website,
+            auth_id: key,
+            auth_name: dataSource[index].auth_name,
+            module_name: dataSource[index].module_name,
+            auth_c: dataSource[index].auth_c,
+            auth_a: dataSource[index].auth_a,
+            sort_order: dataSource[index].sort_order,
         });
         this.setState({
             visible: true,
@@ -198,14 +187,31 @@ export default class UForm extends Component{
     //更新修改
     handleUpdate = () => {
         const form = this.form;
-        const { dataSource, tableRowKey } = this.state;
+     //   const { dataSource, tableRowKey } = this.state;
         form.validateFields((err, values) => {
             if (err) {
                 return;
             }
-            this.setState({
-                visible: false,
-            });
+
+            updateAddAuth(values).then(res=>{
+              let code =res.code;
+              if(code=='000000'){
+
+                  var list=res.data.list;
+
+                  for(let i=0;i<list.length;i++){
+                      list[i]['key']=list[i]['auth_id']
+                  }
+                  this.setState({
+                      visible: false,
+                  });
+              }else{
+                  message.error(res.msg);
+              }
+          },err=>{
+              message.error(err);
+          });
+
 
 
         });

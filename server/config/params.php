@@ -2,5 +2,5 @@
 
 return [
     'adminEmail' => 'admin@example.com',
-    'pagesize' => '50',
+    'page_size' => '50',
 ];

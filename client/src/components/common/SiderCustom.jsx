@@ -60,7 +60,6 @@ export default class SiderCustom extends Component{
                 </SubMenu>
             )
         });
-        console.log(menulist);
         return(
             <Sider
                 trigger={null}

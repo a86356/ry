@@ -13,34 +13,18 @@ export default class FormTable extends Component{
         const columns = [
             {
                 title: 'id',
-                dataIndex: 'menu_id',
+                dataIndex: 'id',
                 width: 50,
             },
             {
-                title: 'pid',
-                dataIndex: 'pid',
+                title: '权限名称',
+                dataIndex: 'name',
                 width: 50,
             },
             {
-            title: '名称',
-            dataIndex: 'name',
-            width: 80,
-        }, {
-            title: '键名',
-            dataIndex: 'key',
-            width: 80,
-        }, {
-            title: '路由',
-            dataIndex: 'router',
-            width: 80,
-        },{
-            title: '排序',
-            dataIndex: 'sort',
-            width: 50,
-        },{
             title: '模块',
             dataIndex: 'module',
-            width: 100,
+            width: 80,
         },{
             title: '控制器',
             dataIndex: 'controller',
@@ -49,6 +33,11 @@ export default class FormTable extends Component{
             {
                 title: '方法',
                 dataIndex: 'action',
+                width:100,
+            },
+            {
+                title: '排序',
+                dataIndex: 'sort',
                 width:100,
             },
             {

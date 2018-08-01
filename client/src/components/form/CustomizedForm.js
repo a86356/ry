@@ -30,31 +30,28 @@ class CustomizedForm extends Component{
                 onOk={onCreate}
             >
                 <Form layout="horizontal">
-                    <FormItem label="姓名" {...FormItemLayout} >
+                    <FormItem label="名称" {...FormItemLayout} >
                         {getFieldDecorator('name', {
-                            rules: [{ required: true, message: '请输入姓名！' }],
+                            rules: [{ required: true, message: '请输入名称！' }],
                         })(
                             <Input />
                         )}
                     </FormItem>
-                    <FormItem label="性别" {...FormItemLayout} >
-                        {getFieldDecorator('sex', {
-                            rules: [{ required: true, message: '请选择性别！' }],
+                    <FormItem label="模块" {...FormItemLayout} >
+                        {getFieldDecorator('module', {
+                            rules: [{ required: true, message: '请输入模块！' }],
                         })(
-                            <Radio.Group>
-                                <Radio value='男'>男</Radio>
-                                <Radio value='女'>女</Radio>
-                            </Radio.Group>
+                            <Input />
                         )}
                     </FormItem>
-                    <FormItem label="年龄" {...FormItemLayout} >
-                        {getFieldDecorator('age', {
-                            rules: [{ required: true, message: '请输入年龄！' }],
+                    <FormItem label="控制器" {...FormItemLayout} >
+                        {getFieldDecorator('controller', {
+                            rules: [{ required: true, message: '请输入控制器！' }],
                         })(
-                            <InputNumber min={0} max={199} step={1} />
+                            <Input />
                         )}
                     </FormItem>
-                    <FormItem label="地址" {...FormItemLayout} >
+                    <FormItem label="方法" {...FormItemLayout} >
                         {getFieldDecorator('address', {
                             rules: [{ required: true, message: '请选择地址！' }],
                         })(

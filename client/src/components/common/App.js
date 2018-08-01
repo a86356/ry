@@ -6,10 +6,10 @@ import '../../style/index.less';
 import SiderCustom from './SiderCustom';
 import HeaderCustom from './HeaderCustom';
 import noMatch from './404';
-import UForm from 'pages/system/auth/Form'
+import AuthForm from 'pages/system/auth/Form'
 import Welcome from 'pages/system/welcome/Welcome'
 
-import {getUserInfo} from "../../api/User";
+import {getUserInfo} from "api/User";
 import { message } from 'antd';
 const {Content, Footer} = Layout;
 
@@ -56,8 +56,8 @@ export default class App extends Component {
                         <Switch>
 
                             <Route exact path={'/app'} component={Welcome} />
-                            <Route exact path={'/app/system/auth'} component={UForm} />
-                            <Route exact path={'/form'} component={UForm} />
+                            <Route exact path={'/app/system/auth'} component={AuthForm} />
+                            <Route exact path={'/form'} component={AuthForm} />
                             <Route component={noMatch} />
                         </Switch>
                     </Content>

@@ -4,6 +4,23 @@ export function fetch(config){
 
     let accessToken=localStorage.getItem("accessToken");
 
+    var params;
+    if(config.method=='get'){
+        if(config.data!=null){
+            params=config.data;
+            params.accessToken=accessToken;
+        }else{
+            params={
+                accessToken:accessToken
+            };
+        }
+    }
+    if(config.method=='post'){
+        params={
+            accessToken:accessToken
+        };
+    }
+
     //返回promise对象
     return new Promise((resolve,reject) =>{
         //创建axios实例，把基本的配置放进去
@@ -13,9 +30,7 @@ export function fetch(config){
             timeout: 3000,
 
             withCredentials:"include",
-            params:{
-                accessToken:accessToken
-            },
+            params:params,
             //定义请求根目录
             baseURL: 'http://localhost/yiicms/server/web/index.php/'
         });

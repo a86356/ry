@@ -56,6 +56,14 @@ class Group extends \yii\db\ActiveRecord
         return $this->hasMany(GroupAuth::className(), ['group_id' => 'group_id']);
     }
 
+    public function getAuths()
+    {
+
+        return $this->hasMany(Auth::className(), ['auth_id' => 'auth_id'])
+           ->viaTable(GroupAuth::tableName(),['group_id'=>'group_id']);
+    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -63,6 +71,8 @@ class Group extends \yii\db\ActiveRecord
     {
         return $this->hasMany(UserGroup::className(), ['group_id' => 'group_id']);
     }
+
+
 
     /**
      * @return \yii\db\ActiveQuery

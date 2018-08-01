@@ -30,55 +30,45 @@ class CustomizedForm extends Component{
                 onOk={onCreate}
             >
                 <Form layout="horizontal">
-                    <FormItem label="姓名" {...FormItemLayout} >
-                        {getFieldDecorator('name', {
-                            rules: [{ required: true, message: '请输入姓名！' }],
+                    <FormItem label="权限id" {...FormItemLayout} >
+                        {getFieldDecorator('auth_id', {
+                            rules: [{ required: true, message: '请输入权限id！' }],
+                        })(
+                            <Input  readOnly />
+                        )}
+                    </FormItem>
+
+                    <FormItem label="名称" {...FormItemLayout} >
+                        {getFieldDecorator('auth_name', {
+                            rules: [{ required: true, message: '请输入名称！' }],
                         })(
                             <Input />
                         )}
                     </FormItem>
-                    <FormItem label="性别" {...FormItemLayout} >
-                        {getFieldDecorator('sex', {
-                            rules: [{ required: true, message: '请选择性别！' }],
+                    <FormItem label="模块" {...FormItemLayout} >
+                        {getFieldDecorator('module_name', {
+                            rules: [{ required: true, message: '请输入模块' }],
                         })(
-                            <Radio.Group>
-                                <Radio value='男'>男</Radio>
-                                <Radio value='女'>女</Radio>
-                            </Radio.Group>
+                            <Input />
                         )}
                     </FormItem>
-                    <FormItem label="年龄" {...FormItemLayout} >
-                        {getFieldDecorator('age', {
-                            rules: [{ required: true, message: '请输入年龄！' }],
+                    <FormItem label="控制器" {...FormItemLayout} >
+                        {getFieldDecorator('auth_c', {
+                            rules: [{ required: true, message: '请输入控制器！' }],
                         })(
-                            <InputNumber min={0} max={199} step={1} />
+                            <Input />
                         )}
                     </FormItem>
-                    <FormItem label="地址" {...FormItemLayout} >
-                        {getFieldDecorator('address', {
-                            rules: [{ required: true, message: '请选择地址！' }],
+                    <FormItem label="方法" {...FormItemLayout} >
+                        {getFieldDecorator('auth_a', {
+                            rules: [{ required: true, message: '请输入方法！' }],
                         })(
-                            <Cascader options={options}/>
+                            <Input />
                         )}
                     </FormItem>
-                    <FormItem label="手机号" {...FormItemLayout} >
-                        {getFieldDecorator('phone', {
-                            rules: [{
-                                pattern: /^1(3|4|5|7|8)\d{9}$/, message: "手机号码格式不正确！"
-                            },{
-                                required: true, message: '请输入手机号！'
-                            }],
-                        })(
-                            <Input  style={{ width: '100%' }} />
-                        )}
-                    </FormItem>
-                    <FormItem label="邮箱" {...FormItemLayout} >
-                        {getFieldDecorator('email', {
-                            rules: [{
-                                type: 'email', message: '邮箱格式不正确！',
-                            }, {
-                                required: true, message: '请输入邮箱！',
-                            }],
+                    <FormItem label="排序" {...FormItemLayout} >
+                        {getFieldDecorator('sort_order', {
+                            rules: [{ required: true, message: '请输入排序数字！' }],
                         })(
                             <Input />
                         )}

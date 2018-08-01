@@ -95,6 +95,7 @@ module.exports = {
         'pages': path.resolve(__dirname, '../src/pages'),
         'static': path.resolve(__dirname, '../src/static'),
         'config': path.resolve(__dirname, '../src/config'),
+        'api': path.resolve(__dirname, '../src/api'),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
