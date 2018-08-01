@@ -42,13 +42,19 @@ class UserauthController extends BaseController
 
 
      //添加或更新权限
-    public function actionaddOrUpdate()
+    public function actionAddOrUpdate()
     {
-       $form = new LoginForm();
+
+        $auth=Auth::findOne(['auth_id',5555]);
+        var_dump($auth->isNewRecord);
+
+        $auth=new Auth();
+            
+      /* $form = new LoginForm();
        if($form->load(\Yii::$app->getRequest()->post(),'') && !$form->validate())
        {
             ApiException($form->getError(),'900000');
-       }
+       }*/
 
     }
 
