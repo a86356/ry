@@ -49,7 +49,7 @@ class UserauthController extends BaseController
         var_dump($auth->isNewRecord);
 
         $auth=new Auth();
-            
+
       /* $form = new LoginForm();
        if($form->load(\Yii::$app->getRequest()->post(),'') && !$form->validate())
        {
