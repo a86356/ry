@@ -11,6 +11,7 @@ use yii\base\UserException;
 function ApiException($msg='',$code=''){
 
     throw new UserException($msg,$code);
+    //exit();
 }
 //获得随机数
 function getRandom($length=32){

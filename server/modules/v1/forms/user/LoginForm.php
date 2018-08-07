@@ -1,16 +1,16 @@
 <?php
 
-namespace app\modules\v1\forms;
+namespace app\modules\v1\forms\user;
 
 
 use app\models\User;
 use yii\base\Model;
+use app\modules\v1\forms\CommonForm;
 
 class LoginForm extends CommonForm
 {
     public $username;
     public $password;
-    public $auth_key;
 
     private $_user;
 
@@ -28,7 +28,8 @@ class LoginForm extends CommonForm
     // 检测密码
     public function checkpwd($attribute, $params)
     {
-        $user=User::findOne(['username'=>$this->username,'password'=>md5($this->password)]);
+
+        $user=User::findOne(['username'=>$this->username,'password'=>md5($this->password.\Yii::$app->params['salt'])]);
 
         if(!$user){
             $this->addError($attribute, $params['wrong_pwd']);
@@ -37,6 +38,7 @@ class LoginForm extends CommonForm
         $this->_user=$user;
         return true;
     }
+
 
 
     //登录

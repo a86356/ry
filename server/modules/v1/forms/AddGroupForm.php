@@ -1,11 +1,12 @@
 <?php
 
-namespace app\modules\v1\forms;
+namespace app\modules\v1\forms\user;
 
 
 use app\models\Group;
 use app\models\User;
 use yii\base\Model;
+use app\modules\v1\forms\CommonForm;
 
 class AddGroupForm extends CommonForm
 {

@@ -8,7 +8,7 @@ import BreadcrumbCustom from 'components/common/BreadcrumbCustom';
 import CollectionCreateForm from './CustomizedForm';
 import FormTable from './FormTable';
 
-import {getAuthList,updateAuth,AddAuth,DeleteAuth} from "api/system";
+import {ReadUser,UpdateUser,DeleteUser,AddUser} from "api/system";
 
 const Search = Input.Search;
 
@@ -25,7 +25,7 @@ function isContains(arr, item){
 function catchIndex(arr, key){ //获取INDEX
     var i=0;
     arr.map(function (ar, index) {
-        if(ar.auth_id==key){
+        if(ar.user_id==key){
             i=index;
         }
     });
@@ -61,14 +61,15 @@ export default class UForm extends Component{
     }
     //getData
     getData = () => {
-        getAuthList({page:this.state.page,name:this.state.userName}).then(res=>{
+
+        ReadUser({page:this.state.page,name:this.state.userName}).then(res=>{
             let code =res.code;
             if(code=='000000'){
 
                 var list=res.data.list;
 
                 for(let i=0;i<list.length;i++){
-                    list[i]['key']=list[i]['auth_id']
+                    list[i]['key']=list[i]['user_id']
                 }
                 this.setState({
                     dataSource: list,
@@ -126,10 +127,9 @@ export default class UForm extends Component{
             if (err) {
                 return;
             }
-            values.auth_id=0;
+            values.user_id=0;
 
-
-            AddAuth(values).then(res=>{
+            AddUser(values).then(res=>{
                   let code =res.code;
                   if(code=='000000'){
 
@@ -160,10 +160,12 @@ export default class UForm extends Component{
     };
     //单个删除
     onDelete = (key) => {
-           let arr=[key];
 
+            let obj={
+                'user_id':key
+            };
 
-           DeleteAuth(arr).then(res=>{
+           DeleteUser(obj).then(res=>{
                let code =res.code;
                if(code=='000000'){
 
@@ -184,12 +186,13 @@ export default class UForm extends Component{
         const index = catchIndex(dataSource, key);
 
         form.setFieldsValue({
-            auth_id: key,
-            auth_name: dataSource[index].auth_name,
-            module_name: dataSource[index].module_name,
-            auth_c: dataSource[index].auth_c,
-            auth_a: dataSource[index].auth_a,
-            sort_order: dataSource[index].sort_order,
+            user_id: key,
+            username: dataSource[index].username,
+            password: dataSource[index].password,
+            nickname: dataSource[index].nickname,
+            phone: dataSource[index].phone,
+            group_id: dataSource[index].group_id,
+            status: dataSource[index].status,
         });
         this.setState({
             visible: true,
@@ -211,10 +214,9 @@ export default class UForm extends Component{
                 return;
             }
 
-            updateAuth(values).then(res=>{
+            UpdateUser(values).then(res=>{
               let code =res.code;
               if(code=='000000'){
-
 
                   this.setState({
                       visible: false,
@@ -247,7 +249,7 @@ export default class UForm extends Component{
 
         return(
             <div>
-                <BreadcrumbCustom paths={['系统管理','权限管理']}/>
+                <BreadcrumbCustom paths={['系统管理','管理员管理']}/>
                 <div className='formBody'>
                     <Row gutter={16}>
                         <Col className="gutter-row" sm={8}>
@@ -280,8 +282,8 @@ export default class UForm extends Component{
                         loading={loading}
                     />
                     {isUpdate?
-                        <CollectionCreateForm ref={this.saveFormRef} visible={visible} onCancel={this.handleCancel} onCreate={this.handleUpdate} title="修改信息" okText="更新"
-                    /> : <CollectionCreateForm ref={this.saveFormRef} visible={visible} onCancel={this.handleCancel} onCreate={this.handleCreate} title="新建信息" okText="创建"
+                        <CollectionCreateForm ref={this.saveFormRef} visible={visible} onCancel={this.handleCancel} onCreate={this.handleUpdate} title="修改信息" okText="更新" isUpdate={true}
+                    /> : <CollectionCreateForm ref={this.saveFormRef} visible={visible} onCancel={this.handleCancel} onCreate={this.handleCreate} title="新建信息" okText="创建" isUpdate={false}
                     />}
                 </div>
             </div>

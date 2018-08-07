@@ -25,6 +25,7 @@ class GroupController extends BaseController
         return [
             'index'=>['POST'],
             'change-password'=>['POST'],
+            'readall'=>['GET','OPTIONS'],
         ];
     }
 
@@ -57,5 +58,10 @@ class GroupController extends BaseController
         var_dump( 222);
     }
 
+    public function actionReadall()
+    {
+        $r=Group::find()->where(['status'=>1])->all();
+        return $r;
+    }
 
 }

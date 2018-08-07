@@ -5,15 +5,23 @@ namespace app\modules\v1\controllers;
 
 use app\models\Auth;
 use app\models\Group;
+use app\models\User;
 use app\modules\v1\common\BaseController;
+use app\modules\v1\forms\userAuth\MenuAddForm;
+use app\modules\v1\forms\userAuth\MenuDeleteForm;
+use app\modules\v1\forms\userAuth\MenuUpdateForm;
 use vendor\pagination\Pagination;
 class UserauthController extends BaseController
 {
     public function verbs()
     {
         return [
-            'get-auth-list'=>['get'],
-            'add-or-update'=>['post'],
+            'get-auth-list'=>['get','options'],
+            'update'=>['post'],
+            'add'=>['post'],
+            'read'=>['get'],
+            'delete'=>['get'],
+            'test'=>['get'],
         ];
     }
 
@@ -22,11 +30,11 @@ class UserauthController extends BaseController
      {
             $page=\Yii::$app->getRequest()->get('page');
             $name=\Yii::$app->getRequest()->get('name');
-            $obj=Group::findOne(['group_id'=>1]);
+            $obj=Group::findOne(['group_id'=>Group::getGroupId()]);
             $query= $obj->getAuths()->asArray();
 
             if(!empty($name)){
-                $query->andWhere(['like', 'auth_name', '权限']);
+                $query->andWhere(['like', 'auth_name', $name]);
             }
              $count=$query->count();
 
@@ -41,21 +49,50 @@ class UserauthController extends BaseController
      }
 
 
-     //添加或更新权限
-    public function actionAddOrUpdate()
+    public function actionUpdate()
     {
-
-        $auth=Auth::findOne(['auth_id',5555]);
-        var_dump($auth->isNewRecord);
-
-        $auth=new Auth();
-
-      /* $form = new LoginForm();
-       if($form->load(\Yii::$app->getRequest()->post(),'') && !$form->validate())
-       {
+        $form = new MenuUpdateForm();
+        if($form->load(\Yii::$app->getRequest()->post(),'') && !$form->validate())
+        {
             ApiException($form->getError(),'900000');
-       }*/
+        }
 
+        $form->save();
+        return "";
     }
 
+    public function actionAdd()
+    {
+        $form = new MenuAddForm();
+        if($form->load(\Yii::$app->getRequest()->post(),'') && !$form->validate())
+        {
+            ApiException($form->getError(),'900000');
+        }
+
+        $form->save();
+        return "";
+    }
+
+    public function actionDelete()
+    {
+
+        $form = new MenuDeleteForm();
+        if($form->load(\Yii::$app->getRequest()->get(),'') && !$form->validate())
+        {
+            ApiException($form->getError(),'900000');
+        }
+
+        $form->delete();
+        return "";
+    }
+
+    public function actionTest()
+    {
+        $query = User::find()->where(['user_id'=>1]);
+
+        // 输出SQL语句
+        $commandQuery = clone $query;
+        echo $commandQuery->createCommand()->getRawSql();
+        return ;
+    }
 }

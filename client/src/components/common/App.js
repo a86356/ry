@@ -7,6 +7,9 @@ import SiderCustom from './SiderCustom';
 import HeaderCustom from './HeaderCustom';
 import noMatch from './404';
 import AuthForm from 'pages/system/auth/Form'
+import GroupForm from 'pages/system/group/Form'
+import UserForm from 'pages/system/user/Form'
+import MenuForm from 'pages/system/menu/Form'
 import Welcome from 'pages/system/welcome/Welcome'
 
 import {getUserInfo} from "api/User";
@@ -57,6 +60,9 @@ export default class App extends Component {
 
                             <Route exact path={'/app'} component={Welcome} />
                             <Route exact path={'/app/system/auth'} component={AuthForm} />
+                            <Route exact path={'/app/system/group'} component={GroupForm} />
+                            <Route exact path={'/app/system/user'} component={UserForm} />
+                            <Route exact path={'/app/system/menu'} component={MenuForm} />
                             <Route exact path={'/form'} component={AuthForm} />
                             <Route component={noMatch} />
                         </Switch>

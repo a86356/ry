@@ -2,24 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: admin
- * Date: 2018/7/24
- * Time: 13:50
+ * Date: 2018/8/7
+ * Time: 16:20
  */
 
 namespace app\modules\v1\controllers;
 
 
-use app\componments\auth\QueryParamAuth;
-use app\models\User;
 use app\modules\v1\common\BaseController;
-use app\modules\v1\forms\user\AddUserForm;
-use app\modules\v1\forms\user\DeleteUserForm;
-use app\modules\v1\forms\user\LoginForm;
-use app\modules\v1\forms\user\UpdateUserForm;
-use yii\data\Pagination;
 
-
-class UserController extends BaseController
+class MenuController extends BaseController
 {
     public function verbs()
     {
@@ -47,52 +39,10 @@ class UserController extends BaseController
         return $behaviors;
     }
 
-    //创建表单
-    public function actionForm()
-    {
-
-        if(YII_DEBUG){
-            $form=\Yii::$app->getRequest()->post();
-            $name=ucfirst($form['name']);
-
-            $dest=__DIR__.'/../forms/'.$name.'Form.php';
-            if(!file_exists($dest)){
-                $tpl= __DIR__ . '/../forms/LoginForm.php';
-                $content=file_get_contents($tpl);
-                $content= str_replace('LoginForm',$name.'Form',$content);
-                file_put_contents($dest,$content);
-                chmod($dest , 0777);   //0644 要修改成的权限值
-            }
-        }
 
 
-    }
 
-    //登录
-    public function actionLogin()
-    {
-        $form = new LoginForm();
-        if($form->load(\Yii::$app->getRequest()->post(),'') && !$form->validate())
-        {
-            ApiException($form->getError(),'900000');
-        }
-        $auth_key=$form->login();
-        return ['accessToken'=>$auth_key];
-    }
 
-    //修改密码
-    public function actionChangePassword()
-    {
-        $form = new ChangePasswordForm();
-        if($form->load(\Yii::$app->getRequest()->post(),'') && !$form->validate())
-        {
-            ApiException($form->getError(),'900000');
-        }
-        $form->changePassword();
-        return "";
-    }
-
-    //添加管理员
     public function actionAdd()
     {
 
@@ -131,20 +81,6 @@ class UserController extends BaseController
         return "";
     }
 
-
-    //获得用户信息
-    public function actionGetUserinfo(){
-        $uid=\Yii::$app->getUser()->getId();
-
-        $user=User::findOne($uid);
-        return $user;
-    }
-
-    //退出登录
-    public function actionlogout()
-    {
-        return "";
-    }
 
     //列表
     public function actionRead()
