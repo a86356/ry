@@ -15,6 +15,9 @@ $config = [
     'modules' => [
         'v1' => [
             'class' => 'app\modules\v1\v1',
+        ],
+        'v2' => [
+            'class' => 'app\modules\v2\v2',
         ]
     ],
 
@@ -30,13 +33,7 @@ $config = [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
-        'response'=>[
-            'class' => 'yii\web\Response',
-            'format'=>'json',
-            'formatters'=>[
-                'json'=>'app\componments\format\ApiJsonFormatResponse',
-            ],
-        ],
+
         'rabbitmq'=>[
             'class'=>'app\componments\mq\RabbitMQ',
             'host'=>'127.0.0.1',
